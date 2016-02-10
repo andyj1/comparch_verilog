@@ -27,5 +27,5 @@ wire w0, w1, w2;
 	and u1(w0, a, b);
 	and u2(w1, b, cin);
 	and u3(w2, cin, b);
-	or  u4(carry, w0, w1, w2)
+	or  u4(carry, w0, w1, w2);
 endmodule
