@@ -5,7 +5,7 @@
 // Author: Andy Jeong
 //////////////////////////////////////////////////////////////////////////////////
 
-module ram(status, a0, b0, clk);
+module jumping(status, a0, b0, clk);
 input a0, b0, status;
 reg[1:0] count;
 
