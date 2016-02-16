@@ -1,23 +1,10 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    00:05:10 02/09/2016 
-// Design Name: 
-// Module Name:    fulladder 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
+// Module Name: 2-bit fulladder 
 // Description: 
-//
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
-//
+// Author: Andy Jeong
 //////////////////////////////////////////////////////////////////////////////////
+
 module fulladder(c_out, sum0, sum1, a0, b0, a1, b1);
 output sum0, sum1, c_out;
 input a0, b0, a1, b1;
