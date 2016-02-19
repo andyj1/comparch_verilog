@@ -1,4 +1,4 @@
-module twoBitRam(sel1, sel2, out1, out2);
+module twoBitRam(sel1, sel2, out);
 
 //−−−−−−−−−−−−−Input Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 
@@ -7,8 +7,7 @@ input sel2;
 
 //−−−−−−−−−−−−−Output Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 
-output out1;
-output out2;
+output [1:0] out;
 
 //−−−−−−−−−−−−−Input ports Data Type−−−−−−−−−−−−−−−−−−−
 // By rule all the input ports should be wires
@@ -17,9 +16,7 @@ wire sel2;
 
 //−−−−−−−−−−−−−Output Ports Data Type−−−−−−−−−−−−−−−−−−
 // Output port can be a storage element (reg) or a wire
-wire out1;
-wire out2;
-
+wire [1:0] out;
 
 //−−−−−−----−-−−−−−−Instructions---−−−−−−−−−−−−−−−--−−−
 /*
@@ -58,8 +55,8 @@ and and3_lsb(a3_lsb, sel1, !sel2, 1'b0);
 and and4_lsb(a4_lsb, sel1, sel2, 1'b0);
 
 //Final Or Gate
-or or_msb(out1,a1_msb,a2_msb,a3_msb,a4_msb);
-or or_lsb(out2,a1_lsb,a2_lsb,a3_lsb,a4_lsb);
+or or_msb(out[0],a1_msb,a2_msb,a3_msb,a4_msb);
+or or_lsb(out[1],a1_lsb,a2_lsb,a3_lsb,a4_lsb);
 
 
 endmodule
