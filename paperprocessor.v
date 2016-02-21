@@ -37,15 +37,14 @@ initial fork          //initialization run in parallel
 	  clk = 0;	
 		reset = 1;
 		status = 0;
-		$monitor ( "time = %g   clk =%g status = %b count = %b register = %b a1 = %b a0 = %b data[1] = %b, data[0] = %b", $time, clk, status, count, register, a[1], a[0], data[1], data[0]);
+		$monitor ( "clk =%g status = %b pc = %b register = %b addr=%b%b data = %b%b", clk, status, count, register, a[1], a[0], data[1], data[0]);
 		#20 status = ~status;
 		#22 $finish;   
 join
 
-initial begin
-	$dumpfile ("paperprocessor.vcd");    //for waveform file in .vcd format
-    $dumpvars;
-end
+initial
+	   $dumpfile ("paperprocessor.vcd");    //for waveform file in .vcd format
+    //$dumpvars;
 
 always begin                            //clock toggle
 	#1 clk = ~clk;
