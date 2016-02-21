@@ -11,7 +11,7 @@ module dff (clk, s, r, d, q, qbar);
 		qbar = 1'b0;
 		end
 	always @(posedge clk) begin
-		#1;
+		//#1;
 		q = d;
 		qbar = ~d;
 		end
