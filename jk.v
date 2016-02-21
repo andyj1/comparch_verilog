@@ -1,17 +1,25 @@
+module jk(j,k,clk,rst, q,qb);
+	input j,k,clk,rst;
+	output q,qb;
+	reg q,qb;
+	reg [1:0]jk;
+	always@(posedge clk,posedge rst)
+		begin
+		jk={j,k};
+		if(rst==0)
+		begin
+		case (jk)
+		2'd1:q=1'b0;
+		2'd2:q=1'b1;
+		2'd3:q=~q;
+		default: begin end
+		endcase
+		end
+		else
 
+		q=1'b0;
 
-module jk(q,qn,clk);  //output: q, qn | input: clk
-//−−−−−−−−−−−−−Input Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
-input clk;
-//−−−−−−−−−−−−−Output Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−
-output q,qn;
-//−−−−−−−−−−−−−Registers−−−−−−−−−−−−−−−−−−
-wire q,qn,j,k;
-wire [1:0] w;
+		qb=~q;
 
-  		nand na1(w[0], clk, qn, j);
-  		nand na2(w[1], clk, q, k);
-  		nand na3(q, w[0], qn);
-  		nand na4(qn, w[1], q);
-
-endmodule
+		end
+end module

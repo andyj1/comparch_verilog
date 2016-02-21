@@ -1,11 +1,19 @@
-module dff (clk, s, r, d, q);
+module dff (clk, s, r, d, q, qbar);
 	input clk, s, r, d;
-	output q;
-	reg q;
-	always @(posedge r)
+	output q,qbar;
+	reg q,qbar;
+	always @(posedge r) begin
 		q = 1'b0;
-	always @(posedge s)
+		qbar = 1'b1;
+		end
+	always @(posedge s) begin
 		q = 1'b1;
-	always @(posedge clk)
-		q = #1 d;
+		qbar = 1'b0;
+		end
+	always @(posedge clk) begin
+		#1;
+		q = d;
+		qbar = ~d;
+		end
+
 endmodule

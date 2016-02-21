@@ -1,4 +1,5 @@
 `include "twoBitRam.v"
+
 module test_tb();
 reg clock;
 reg s1;

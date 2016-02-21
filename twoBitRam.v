@@ -16,7 +16,9 @@ wire sel2;
 
 //−−−−−−−−−−−−−Output Ports Data Type−−−−−−−−−−−−−−−−−−
 // Output port can be a storage element (reg) or a wire
-wire [1:0] out;
+wire [1:0]out1;
+wire out2;
+
 
 //−−−−−−----−-−−−−−−Instructions---−−−−−−−−−−−−−−−--−−−
 /*
@@ -31,32 +33,22 @@ in3: 00
 in4: HLT
 */
 
-//set the 4 inputs to the RAM Chip
-//reg in1_msb = 1'b0;
-//reg in1_lsb = 1'b0;
-//reg in2_msb = 1'b0;
-//reg in2_lsb = 1'b1;
-//reg in3_msb = 1'b0;
-//reg in3_lsb = 1'b0;
-//reg in4_msb = 1'b1;
-//reg in4_lsb = 1'b0;
-
 
 //First Demux
-and and1_msb(a1_msb, !sel1, !sel2, 1'b0);
-and and2_msb(a2_msb, !sel1, sel2, 1'b0);
-and and3_msb(a3_msb, sel1, !sel2, 1'b0);
-and and4_msb(a4_msb, sel1, sel2, 1'b1);
+and and1_msb(a1_msb, !sel2, !sel1, 1'b0);
+and and2_msb(a2_msb, !sel2, sel1, 1'b0);
+and and3_msb(a3_msb, sel2, !sel1, 1'b0);
+and and4_msb(a4_msb, sel2, sel1, 1'b1);
 
 //Second Demux
-and and1_lsb(a1_lsb, !sel1, !sel2, 1'b0);
-and and2_lsb(a2_lsb, !sel1, sel2, 1'b1);
-and and3_lsb(a3_lsb, sel1, !sel2, 1'b0);
-and and4_lsb(a4_lsb, sel1, sel2, 1'b0);
+and and1_lsb(a1_lsb, !sel2, !sel1, 1'b0);
+and and2_lsb(a2_lsb, !sel2, sel1, 1'b1);
+and and3_lsb(a3_lsb, sel2, !sel1, 1'b0);
+and and4_lsb(a4_lsb, sel2, sel1, 1'b0);
 
 //Final Or Gate
-or or_msb(out[0],a1_msb,a2_msb,a3_msb,a4_msb);
-or or_lsb(out[1],a1_lsb,a2_lsb,a3_lsb,a4_lsb);
+or or_msb(out[1],a1_msb,a2_msb,a3_msb,a4_msb);
+or or_lsb(out[0],a1_lsb,a2_lsb,a3_lsb,a4_lsb);
 
 
 endmodule
