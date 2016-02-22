@@ -1,10 +1,9 @@
-`timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Module Name: 2-bit fulladder 
-// Description: 
-// Author: Andy Jeong
-// Note: in this adder, one is always adding 1 to the previous number
+// Module Name: fulladder.v
+// Description: Full Adder where 1 is always added to the previous number
 //////////////////////////////////////////////////////////////////////////////////
+
+`timescale 1ns / 1ns
 
 module fulladder(stat, sum, a);
 

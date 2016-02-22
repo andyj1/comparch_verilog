@@ -54,7 +54,7 @@ end
 counter counter0(count, clk, reset);
 register register0(clk, status, count, register);
 setAddress setaddress(a, status, count); 
-ram ram(a[1], a[0], data[1], data[0]);
+ram ram(a, data);
 
 endmodule
 
@@ -100,22 +100,61 @@ or data2(address[0], w[1], status);
 
 endmodule
 
+
+
 //-------ram module
-module ram(a1, a0, o1, o0);
 
-input a1;
-input a0;
-output o1;
-output o0;
 
+module ram(address, out);
+
+parameter Instructions = "./instruct.bin";
+//−−−−−−−−−−−−−Input Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
+input [1:0] address;
+
+//−−−−−−−−−−−−−Output Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−
+output [1:0] out;
+
+//−−−−−−−−−−−−−Input ports Data Type−−−−−−−−−−−−−−−−−−−
+// By rule all the input ports should be wires
+wire [1:0] address;
+
+//−−−−−−−−−−−−−Output Ports Data Type−−−−−−−−−−−−−−−−−−
+// Output port can be a storage element (reg) or a wire
+wire [1:0] out;
+
+
+//-------------Save Instructions In Ram----------------
+reg [1:0] ram_reg [0:3];                // make register 2 bits wide  and 4 bits long
+        initial begin
+                $readmemb(Instructions, ram_reg);       // load program
+        end
+assign out = ram_reg[address];
+
+endmodule
+
+
+
+
+
+
+
+
+
+/*Old stuff
+module ram(a, o);
+
+input [1,0]a;
+output [1,0]o;
+*/
 //determining data based on the address
 // o1 MSB
+/*
 and a1(o1, a1, a0);
 
 //o0 LSB
 and a2(o0, ~a1, a0);
-
 endmodule
+*/
 
 //-------counter module
 module counter(count, clk, rst);

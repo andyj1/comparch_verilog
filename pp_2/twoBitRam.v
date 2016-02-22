@@ -1,52 +1,58 @@
-`timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Module Name: 2-bit fulladder 
-// Description: 
-// Author: Andy Jeong
-// Note: in this adder, one is always adding 1 to the previous number
+// Module Name: twoBitRam.v
+// Description: determines data outputs from address
 //////////////////////////////////////////////////////////////////////////////////
 
-module fulladder(stat, sum, a);
+`timescale 1ns / 1ns
+
+module twoBitRam(addr, data);
 
 //−−−−−−−−−−−−−Input Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 
-inout [1:0] a; //input a 2 bit register
+input [1:0] addr;
 
 //−−−−−−−−−−−−−Output Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 
-output [1:0] sum; //output 2 bit registers
-output stat; //see whether registers overflown
+output [1:0] data;
 
 //−−−−−−−−−−−−−Input ports Data Type−−−−−−−−−−−−−−−−−−−
 // By rule all the input ports should be wires
-wire [1:0] a;
-wire [1:0] b;
+wire [1:0] addr; 
 
 //−−−−−−−−−−−−−Output Ports Data Type−−−−−−−−−−−−−−−−−−
 // Output port can be a storage element (reg) or a wire
-wire [1:0] sum;
-wire stat;
+wire [1:0] data;
 
-//−−−−−−−−−−−−−Intermediate Wires----−−−−−−−−−−−−−−−−−−
-wire w0, w1, w2, w3, w_sum0, w_sum1, w_stat;
 
 //−−−−−−----−-−−−−−−Instructions---−−−−−−−−−−−−−−−--−−−
-//set LSB of input to w_sum0
-xor u0(w_sum0,a[0], 1'b1);
-and (sum[0], w_sum0, 1);
+/*
+Instructions:
+INC: 00
+JNO: 01
+HLT: 10
 
-//set MSB of input to w_sum1
-and u1(w0, a[0], 1'b1);
-xor u2(w1, a[1], 1'b0);
-and u3(w2, a[1], 1'b0);
-and u4(w3, w0, w1);
-xor u5(w_sum1, w0, w1);
-and(sum[1], w_sum1,1);
+in1: INC
+in2: JNO
+in3: 00
+in4: HLT
+*/
 
-//set carry out to be w_stat
-or  u6(w_stat,w2, w3);
-and (stat, w_stat,1);
+
+//First Demux
+and and1_msb(a1_msb, !addr[1], !addr[0], 1'b0);
+and and2_msb(a2_msb, !addr[1], addr[0], 1'b0);
+and and3_msb(a3_msb, addr[1], !addr[0], 1'b0);
+and and4_msb(a4_msb, addr[1], addr[0], 1'b1);
+
+//Second Demux
+and and1_lsb(a1_lsb, !addr[1], !addr[0], 1'b0);
+and and2_lsb(a2_lsb, !addr[1], addr[0], 1'b1);
+and and3_lsb(a3_lsb, addr[1], !addr[0], 1'b0);
+and and4_lsb(a4_lsb, addr[1], addr[0], 1'b0);
+
+//Final Or Gate
+or or_msb(data[1],a1_msb,a2_msb,a3_msb,a4_msb);
+or or_lsb(data[0],a1_lsb,a2_lsb,a3_lsb,a4_lsb);
+
 
 endmodule
-
-

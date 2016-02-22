@@ -1,11 +1,24 @@
 
-//////////////////////////////////////////////////////////////////////////////////
-// Module Name: 2-bit fulladder 
-// Description: This is last updated 2/19/2016 3:11 am. When ran this should 
-// print out only the increment logic
-// Author: Andy Jeong
-// Note: in this adder, one is always adding 1 to the previous number
-//////////////////////////////////////////////////////////////////////////////////
+//
+// School: The Cooper Union
+// Course: ECE151A Spring 2016
+// Assignment: Paper Processor 
+// Group members: Andy Jeong, Brenda So, Gordon Macshane
+// Date: 2/22/2016
+//
+//−−−−−−----−-−−−−−−Instructions---−−−−−−−−−−−−−−−--−−−
+//	Instructions Guide:
+//		INC: 00(2)
+//		JNO: 01(2)
+//		HLT: 10(2)
+//
+//	Instructions for the 2-bit paper processor:
+//		IS1: 	INC
+//		IS2,3:  JNO 00(2)
+//		IS4: 	HLT
+//
+
+`timescale 1ns / 1ns
 
 `include "twoBitRam.v"
 `include "increment.v"
@@ -16,7 +29,7 @@
 `include "dff.v"
 `include "dfff.v"
 
-module test_tb(); 
+module main_tb(); 
 
 reg status; 						// status register
 reg clock; 							// clock register
@@ -59,6 +72,12 @@ initial begin
  	//let the simulation run for 15 seconds
 	#80 $finish;
 end
+
+initial begin
+	$dumpfile ("pp.vcd");    //for waveform file in .vcd format
+    $dumpvars;
+end
+
 
 //only when the instructions are 00
 always @(posedge monostabler)

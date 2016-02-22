@@ -1,0 +1,713 @@
+$date
+	Mon Feb 22 08:16:29 2016
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module main_tb $end
+$var wire 1 ! monostabler $end
+$var wire 1 " pulse $end
+$var wire 1 # openpulser $end
+$var wire 1 $ monostable $end
+$var wire 2 % instructA [1:0] $end
+$var wire 2 & instruct [1:0] $end
+$var wire 1 ' enabled_sta $end
+$var wire 1 ( enabled $end
+$var wire 1 ) adder_to_stat $end
+$var wire 2 * adder_to_out [1:0] $end
+$var wire 2 + PC [1:0] $end
+$var reg 2 , Resetter [1:0] $end
+$var reg 1 - clock $end
+$var reg 2 . constant [1:0] $end
+$var reg 2 / out [1:0] $end
+$var reg 1 0 status $end
+$scope module checkers $end
+$var wire 1 ( enabling $end
+$var wire 2 1 checked [1:0] $end
+$var wire 2 2 check [1:0] $end
+$upscope $end
+$scope module hlt $end
+$var wire 1 - clk $end
+$var wire 2 3 instruct [1:0] $end
+$var wire 1 " pulses $end
+$var wire 1 4 w1 $end
+$var wire 1 5 w2 $end
+$upscope $end
+$scope module inc $end
+$var wire 2 6 instruct [1:0] $end
+$var wire 1 $ mn $end
+$var wire 2 7 prev_value [1:0] $end
+$var wire 2 8 value [1:0] $end
+$var wire 1 ) sta $end
+$scope module adder $end
+$var wire 2 9 a [1:0] $end
+$var wire 1 ) stat $end
+$var wire 1 : w0 $end
+$var wire 1 ; w1 $end
+$var wire 1 < w2 $end
+$var wire 1 = w3 $end
+$var wire 1 > w_stat $end
+$var wire 1 ? w_sum0 $end
+$var wire 1 @ w_sum1 $end
+$var wire 2 A sum [1:0] $end
+$upscope $end
+$upscope $end
+$scope module jnoo $end
+$var wire 2 B instruct [1:0] $end
+$var wire 1 # openpulse $end
+$var wire 1 " pulses $end
+$var wire 1 0 sta $end
+$var wire 1 C w1 $end
+$var wire 1 D w2 $end
+$var wire 1 E notenabling_sta $end
+$var wire 1 F notenabling $end
+$var wire 1 ' enabling_sta $end
+$var wire 1 ( enabling $end
+$var reg 1 G openpulser $end
+$var reg 1 H pulser $end
+$var reg 1 I r $end
+$var reg 1 J s $end
+$scope module dff3 $end
+$var wire 1 H clk $end
+$var wire 1 C d $end
+$var wire 1 I r $end
+$var wire 1 J s $end
+$var reg 1 ( q $end
+$var reg 1 F qbar $end
+$upscope $end
+$scope module dff4 $end
+$var wire 1 H clk $end
+$var wire 1 D d $end
+$var wire 1 I r $end
+$var wire 1 J s $end
+$var reg 1 ' q $end
+$var reg 1 E qbar $end
+$upscope $end
+$upscope $end
+$scope module pc $end
+$var wire 2 K R [1:0] $end
+$var wire 1 " clk $end
+$var wire 1 ' enabled $end
+$var wire 1 # openpulse $end
+$var wire 1 L w1 $end
+$var wire 1 M w2 $end
+$var wire 1 N w3 $end
+$var wire 1 O w4 $end
+$var wire 2 P selectN [1:0] $end
+$var wire 2 Q select [1:0] $end
+$var wire 2 R jno [1:0] $end
+$var wire 2 S S [1:0] $end
+$var wire 2 T R_temp [1:0] $end
+$var wire 2 U D [1:0] $end
+$scope module dff0 $end
+$var wire 1 " clk $end
+$var wire 1 V d $end
+$var wire 1 W r $end
+$var wire 1 X s $end
+$var reg 1 Y q $end
+$var reg 1 Z qbar $end
+$upscope $end
+$scope module dff1 $end
+$var wire 1 " clk $end
+$var wire 1 [ d $end
+$var wire 1 \ r $end
+$var wire 1 ] s $end
+$var reg 1 ^ q $end
+$var reg 1 _ qbar $end
+$upscope $end
+$upscope $end
+$scope module ram1 $end
+$var wire 1 ` a1_lsb $end
+$var wire 1 a a1_msb $end
+$var wire 1 b a2_lsb $end
+$var wire 1 c a2_msb $end
+$var wire 1 d a3_lsb $end
+$var wire 1 e a3_msb $end
+$var wire 1 f a4_lsb $end
+$var wire 1 g a4_msb $end
+$var wire 2 h addr [1:0] $end
+$var wire 2 i data [1:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx i
+bx h
+xg
+0f
+0e
+0d
+0c
+xb
+0a
+0`
+x_
+x^
+0]
+0\
+x[
+xZ
+xY
+0X
+0W
+xV
+bx U
+b0 T
+b0 S
+bx R
+bx Q
+bx P
+0O
+0N
+xM
+xL
+b0 K
+0J
+0I
+0H
+0G
+1F
+1E
+xD
+xC
+bx B
+b1 A
+0@
+1?
+0>
+0=
+0<
+0;
+0:
+b0 9
+b1 8
+b0 7
+bx 6
+x5
+x4
+bx 3
+bx 2
+bx 1
+00
+b0 /
+b1 .
+0-
+b0 ,
+bx +
+b1 *
+0)
+0(
+0'
+bx &
+bx %
+x$
+0#
+0"
+x!
+$end
+#1
+b10 *
+b10 8
+b10 A
+1@
+0?
+1:
+b1 /
+b1 7
+b1 9
+15
+1!
+04
+1$
+0C
+0D
+b0 %
+b0 1
+b0 3
+b0 6
+b0 B
+0[
+1V
+b0 &
+b0 2
+b0 R
+b0 i
+b1 U
+0M
+0L
+0g
+0b
+1Z
+0Y
+b11 P
+1_
+b0 +
+b0 Q
+b0 h
+0^
+1W
+1\
+b11 T
+b11 ,
+b11 K
+#2
+0W
+0\
+b0 T
+b0 ,
+b0 K
+#4
+1"
+1-
+#5
+0!
+0$
+1C
+1D
+b1 %
+b1 1
+b1 3
+b1 6
+b1 B
+1[
+0V
+b1 &
+b1 2
+b1 R
+b1 i
+b10 U
+1M
+1b
+b10 P
+0Z
+b1 +
+b1 Q
+b1 h
+1Y
+#6
+1H
+#7
+0C
+0D
+b11 %
+b11 1
+b11 3
+b11 6
+b11 B
+0F
+1(
+0E
+1'
+#8
+0"
+0-
+#12
+1"
+1-
+#13
+1V
+b0 &
+b0 2
+b0 R
+b0 i
+1L
+b11 U
+0M
+0b
+0_
+1^
+b1 P
+1Z
+b10 +
+b10 Q
+b10 h
+0Y
+#14
+0[
+b1 U
+0L
+b11 P
+1_
+b0 +
+b0 Q
+b0 h
+0^
+1W
+1\
+b11 T
+1N
+1O
+1#
+1G
+#16
+0"
+0-
+#18
+0W
+0\
+b0 T
+0N
+0O
+0#
+0G
+#19
+0H
+#20
+1"
+1H
+1-
+#21
+b11 *
+b11 8
+b11 A
+1;
+1?
+0:
+b10 /
+b10 7
+b10 9
+1C
+1D
+1[
+0!
+0V
+b1 &
+b1 2
+b1 R
+b1 i
+0$
+b10 U
+1M
+1b
+b1 %
+b1 1
+b1 3
+b1 6
+b1 B
+b10 P
+0Z
+b1 +
+b1 Q
+b1 h
+1Y
+1E
+0'
+1F
+0(
+0H
+#22
+1H
+#23
+0C
+0D
+b11 %
+b11 1
+b11 3
+b11 6
+b11 B
+0F
+1(
+0E
+1'
+#24
+0"
+0-
+#28
+1"
+1-
+#29
+1V
+b0 &
+b0 2
+b0 R
+b0 i
+1L
+b11 U
+0M
+0b
+0_
+1^
+b1 P
+1Z
+b10 +
+b10 Q
+b10 h
+0Y
+#30
+0[
+b1 U
+0L
+b11 P
+1_
+b0 +
+b0 Q
+b0 h
+0^
+1W
+1\
+b11 T
+1N
+1O
+1#
+1G
+#32
+0"
+0-
+#34
+0W
+0\
+b0 T
+0N
+0O
+0#
+0G
+#35
+0H
+#36
+1"
+1H
+1-
+#37
+1)
+1>
+b0 *
+b0 8
+b0 A
+1=
+0@
+0?
+1:
+b11 /
+b11 7
+b11 9
+1C
+1D
+1[
+0!
+0V
+b1 &
+b1 2
+b1 R
+b1 i
+0$
+b10 U
+1M
+1b
+b1 %
+b1 1
+b1 3
+b1 6
+b1 B
+b10 P
+0Z
+b1 +
+b1 Q
+b1 h
+1Y
+1E
+0'
+1F
+0(
+0H
+#38
+1H
+#39
+0C
+0D
+b11 %
+b11 1
+b11 3
+b11 6
+b11 B
+0F
+1(
+0E
+1'
+#40
+0"
+0-
+#44
+1"
+1-
+#45
+1V
+b0 &
+b0 2
+b0 R
+b0 i
+1L
+b11 U
+0M
+0b
+0_
+1^
+b1 P
+1Z
+b10 +
+b10 Q
+b10 h
+0Y
+#46
+0[
+b1 U
+0L
+b11 P
+1_
+b0 +
+b0 Q
+b0 h
+0^
+1W
+1\
+b11 T
+1N
+1O
+1#
+1G
+#48
+0"
+0-
+#50
+0W
+0\
+b0 T
+0N
+0O
+0#
+0G
+#51
+0H
+#52
+1"
+1H
+1-
+#53
+0)
+0>
+b1 *
+b1 8
+b1 A
+0=
+0;
+1?
+0:
+10
+b0 /
+b0 7
+b0 9
+1C
+0D
+1[
+0!
+0V
+b1 &
+b1 2
+b1 R
+b1 i
+0$
+b10 U
+1M
+1b
+b1 %
+b1 1
+b1 3
+b1 6
+b1 B
+b10 P
+0Z
+b1 +
+b1 Q
+b1 h
+1Y
+1E
+0'
+1F
+0(
+0H
+#54
+1H
+#55
+0C
+b11 %
+b11 1
+b11 3
+b11 6
+b11 B
+0F
+1(
+#56
+0"
+0-
+#60
+1"
+1-
+#61
+1V
+b0 &
+b0 2
+b0 R
+b0 i
+1L
+b11 U
+0M
+0b
+0_
+1^
+b1 P
+1Z
+b10 +
+b10 Q
+b10 h
+0Y
+#62
+1G
+#64
+0"
+0-
+#66
+0G
+#67
+0H
+#68
+1"
+1H
+1-
+#69
+0"
+05
+14
+0[
+0V
+b10 &
+b10 2
+b10 R
+b10 i
+0$
+0L
+b0 U
+1g
+b10 %
+b10 1
+b10 3
+b10 6
+b10 B
+b0 P
+0Z
+b11 +
+b11 Q
+b11 h
+1Y
+1F
+0(
+0H
+#72
+0-
+#76
+1-
+#80
+0-
+#82

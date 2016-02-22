@@ -1,52 +1,44 @@
-`timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Module Name: 2-bit fulladder 
-// Description: 
-// Author: Andy Jeong
-// Note: in this adder, one is always adding 1 to the previous number
+// Module Name: increment.v
+// Description: increments 2-bit value from previous
 //////////////////////////////////////////////////////////////////////////////////
 
-module fulladder(stat, sum, a);
+`timescale 1ns / 1ns
+
+`include "two_bit_fa.v"
+
+module increment(value, sta, mn, prev_value, instruct);
 
 //−−−−−−−−−−−−−Input Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 
-inout [1:0] a; //input a 2 bit register
+input [1:0] instruct; 	//input a 2 bit register from JNO
+input [1:0] prev_value;
 
 //−−−−−−−−−−−−−Output Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 
-output [1:0] sum; //output 2 bit registers
-output stat; //see whether registers overflown
+inout [1:0] value;
+output sta;
+output mn;
 
 //−−−−−−−−−−−−−Input ports Data Type−−−−−−−−−−−−−−−−−−−
 // By rule all the input ports should be wires
-wire [1:0] a;
-wire [1:0] b;
+wire [1:0] instruct;
+wire [1:0] clk;
+wire [1:0] prev_value;
 
 //−−−−−−−−−−−−−Output Ports Data Type−−−−−−−−−−−−−−−−−−
 // Output port can be a storage element (reg) or a wire
-wire [1:0] sum;
-wire stat;
+wire [1:0] value;
+wire sta;
+wire mn;
 
 //−−−−−−−−−−−−−Intermediate Wires----−−−−−−−−−−−−−−−−−−
-wire w0, w1, w2, w3, w_sum0, w_sum1, w_stat;
+
 
 //−−−−−−----−-−−−−−−Instructions---−−−−−−−−−−−−−−−--−−−
-//set LSB of input to w_sum0
-xor u0(w_sum0,a[0], 1'b1);
-and (sum[0], w_sum0, 1);
 
-//set MSB of input to w_sum1
-and u1(w0, a[0], 1'b1);
-xor u2(w1, a[1], 1'b0);
-and u3(w2, a[1], 1'b0);
-and u4(w3, w0, w1);
-xor u5(w_sum1, w0, w1);
-and(sum[1], w_sum1,1);
 
-//set carry out to be w_stat
-or  u6(w_stat,w2, w3);
-and (stat, w_stat,1);
+and (mn, !instruct[1], !instruct[0]);
+fulladder adder(sta, value, prev_value);
 
 endmodule
-
-

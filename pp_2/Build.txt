@@ -1,0 +1,11 @@
+To compile on terminal: 
+	iverilog -o <objectname> main_tb.v
+
+To run the compiled object file:
+	vvp <objectname>
+
+To see the waveform using gtkwave simulator (as defined in code as ¡°pp.vcd¡±):
+	gtkwave pp.vcd
+
+To remove the object file:
+	rm <objectname>
