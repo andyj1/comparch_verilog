@@ -1,52 +1,72 @@
-`timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Module Name: 2-bit fulladder 
-// Description: 
-// Author: Andy Jeong
-// Note: in this adder, one is always adding 1 to the previous number
+// Module Name: jno.v
+// Description: from the current instructions, outputs ENABLE for checking and counter 
 //////////////////////////////////////////////////////////////////////////////////
+`timescale 1ns/1ns
 
-module fulladder(stat, sum, a);
+module jno(enabling, enabling_sta, openpulse, sta, instruct, pulses);
 
 //−−−−−−−−−−−−−Input Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 
-inout [1:0] a; //input a 2 bit register
+input [1:0] instruct; 	//input a 2 bit register from JNO
+input pulses;
+input sta;
 
 //−−−−−−−−−−−−−Output Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 
-output [1:0] sum; //output 2 bit registers
-output stat; //see whether registers overflown
+output enabling;
+output enabling_sta;
+output openpulse;
 
 //−−−−−−−−−−−−−Input ports Data Type−−−−−−−−−−−−−−−−−−−
 // By rule all the input ports should be wires
-wire [1:0] a;
-wire [1:0] b;
+wire [1:0] instruct;
+wire pulses;
+wire sta;
 
 //−−−−−−−−−−−−−Output Ports Data Type−−−−−−−−−−−−−−−−−−
 // Output port can be a storage element (reg) or a wire
-wire [1:0] sum;
-wire stat;
+wire enabling;
+wire enabling_sta;
 
 //−−−−−−−−−−−−−Intermediate Wires----−−−−−−−−−−−−−−−−−−
-wire w0, w1, w2, w3, w_sum0, w_sum1, w_stat;
+reg s;
+reg r;
+wire notenabling, notenabling_sta;
+wire w1, w2;
+reg mem;
+reg pulser;
+wire openpulse;
+reg openpulser;
 
 //−−−−−−----−-−−−−−−Instructions---−−−−−−−−−−−−−−−--−−−
-//set LSB of input to w_sum0
-xor u0(w_sum0,a[0], 1'b1);
-and (sum[0], w_sum0, 1);
+initial begin
+s = 0;
+r = 0;
+pulser = 0;
+openpulser = 0;
+end
 
-//set MSB of input to w_sum1
-and u1(w0, a[0], 1'b1);
-xor u2(w1, a[1], 1'b0);
-and u3(w2, a[1], 1'b0);
-and u4(w3, w0, w1);
-xor u5(w_sum1, w0, w1);
-and(sum[1], w_sum1,1);
+and a1(w1, !instruct[1], instruct[0]);
+and a2(w2, !sta, !instruct[1], instruct[0]);
+and a3 (openpulse, !sta, openpulser);
 
-//set carry out to be w_stat
-or  u6(w_stat,w2, w3);
-and (stat, w_stat,1);
+always @(posedge w1)
+begin
+	#1
+	pulser = 1;
+	#8
+	openpulser = 1;
+	#4
+	openpulser = 0;
+	#1
+	pulser = 0;
+	#1
+	pulser = 1;
+	#1
+	pulser = 0;
+end
+dff dff3(pulser, s, r, w1, enabling, notenabling); //enabling the checking
+dff dff4(pulser, s, r, w2, enabling_sta, notenabling_sta); //enabling for counter
 
 endmodule
-
-

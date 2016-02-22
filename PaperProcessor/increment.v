@@ -1,58 +1,58 @@
 //////////////////////////////////////////////////////////////////////////////////
-// Module Name: twoBitRam.v
-// Description: determines data outputs from address
+// Module Name: increment.v
+// Description: increments 2-bit value from previous
 //////////////////////////////////////////////////////////////////////////////////
 
 `timescale 1ns / 1ns
 
-module twoBitRam(addr, data);
+`include "two_bit_fa.v"
+
+module increment(value, sta, pulser, mn, prev_value, instruct);
 
 //−−−−−−−−−−−−−Input Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 
-input [1:0] addr;
+input [1:0] instruct; 	//input a 2 bit register from JNO
+input [1:0] prev_value;
+input pulser;
 
 //−−−−−−−−−−−−−Output Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 
-output [1:0] data;
+inout [1:0] value;
+output sta;
+output mn;
 
 //−−−−−−−−−−−−−Input ports Data Type−−−−−−−−−−−−−−−−−−−
 // By rule all the input ports should be wires
-wire [1:0] addr; 
+wire [1:0] instruct;
+wire [1:0] clk;
+wire [1:0] prev_value;
+wire pulse;
 
 //−−−−−−−−−−−−−Output Ports Data Type−−−−−−−−−−−−−−−−−−
 // Output port can be a storage element (reg) or a wire
-wire [1:0] data;
+wire [1:0] value;
+wire sta;
+reg mn;
+wire w1;
+
+//−−−−−−−−−−−−−Intermediate Wires----−−−−−−−−−−−−−−−−−−
 
 
 //−−−−−−----−-−−−−−−Instructions---−−−−−−−−−−−−−−−--−−−
-/*
-Instructions:
-INC: 00
-JNO: 01
-HLT: 10
 
-in1: INC
-in2: JNO
-in3: 00
-in4: HLT
-*/
+and (w1, pulser, !instruct[1], !instruct[0]);
+initial begin
+mn = 0;
+end
 
+always @(posedge w1)
+begin
+	#1
+	mn = 1;
+	#2
+	mn = 0;
+end
 
-//First Demux
-and and1_msb(a1_msb, !addr[1], !addr[0], 1'b0);
-and and2_msb(a2_msb, !addr[1], addr[0], 1'b0);
-and and3_msb(a3_msb, addr[1], !addr[0], 1'b0);
-and and4_msb(a4_msb, addr[1], addr[0], 1'b1);
-
-//Second Demux
-and and1_lsb(a1_lsb, !addr[1], !addr[0], 1'b0);
-and and2_lsb(a2_lsb, !addr[1], addr[0], 1'b1);
-and and3_lsb(a3_lsb, addr[1], !addr[0], 1'b0);
-and and4_lsb(a4_lsb, addr[1], addr[0], 1'b0);
-
-//Final Or Gate
-or or_msb(data[1],a1_msb,a2_msb,a3_msb,a4_msb);
-or or_lsb(data[0],a1_lsb,a2_lsb,a3_lsb,a4_lsb);
-
+fulladder adder(sta, value, prev_value);
 
 endmodule

@@ -1,4 +1,3 @@
-
 //
 // School: The Cooper Union
 // Course: ECE151A Spring 2016
@@ -17,8 +16,7 @@
 //		IS2,3:  JNO 00(2)
 //		IS4: 	HLT
 //
-
-`timescale 1ns / 1ns
+`timescale 1ns/1ns
 
 `include "twoBitRam.v"
 `include "increment.v"
@@ -29,7 +27,7 @@
 `include "dff.v"
 `include "dfff.v"
 
-module main_tb(); 
+module test_tb(); 
 
 reg status; 						// status register
 reg clock; 							// clock register
@@ -78,7 +76,6 @@ initial begin
     $dumpvars;
 end
 
-
 //only when the instructions are 00
 always @(posedge monostabler)
 begin
@@ -109,7 +106,8 @@ instruct
 //connect increment blackbox to testbench
 increment inc(
 adder_to_out, 
-adder_to_stat, 
+adder_to_stat,
+pulse, 
 monostable, 
 out,
 instructA);
