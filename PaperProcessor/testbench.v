@@ -90,7 +90,8 @@ instruct
 //connect increment blackbox to testbench
 increment inc(
 adder_to_out, 
-adder_to_stat, 
+adder_to_stat,
+pulse, 
 monostable, 
 out,
 instructA);
