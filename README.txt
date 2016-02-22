@@ -1,7 +1,11 @@
-Team Name: 	Aardvark
+Verilog Paper Processor
+(https://sites.google.com/site/kotukotuzimiti/Paper_Processor)
+
+Team Name: Aardvark
 
 Team Members: Andy Jeong, Gordon Macshane, Brenda So
 
+Cooper Union ECE 151A: Computer Architecture
 
 
 To change the directory to the file location:
