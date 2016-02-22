@@ -18,7 +18,7 @@ wire [1:0] jno;
 wire clk;
 wire enabled;
 wire [1:0] R;
-wire sta;
+wire openpulse;
 
 //−−−−−−−−−−−−−Output Ports Data Type−−−−−−−−−−−−−−−−−−
 // Output port can be a storage element (reg) or a wire
@@ -31,7 +31,6 @@ wire w1, w2,w3,w4, w5, w6;
 wire [1:0] D;
 wire [1:0] S;
 wire [1:0] R_temp;
-wire [1:0] jnoo;
 
 //−−−−−−----−-−−−−−−Instructions---−−−−−−−−−−−−−−−--−−−
 and a1(S[0], openpulse, enabled, jno[0]);
