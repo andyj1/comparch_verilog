@@ -1,26 +1,25 @@
 //////////////////////////////////////////////////////////////////////////////////
-// Module Name: dff.v
+// Module Name: dff_reset_negedge.v
 // Description: D flip flop that sets and resets at negedge
 //////////////////////////////////////////////////////////////////////////////////
 
 `timescale 1ns / 1ns
 
-module dff (clk, s, r, d, q, qbar);
+module dff_reset_negedge (clk, s, r, d, output_q, output_not_q);
 	input clk, s, r, d;
-	output q,qbar;
-	reg q,qbar;
+	output output_q, output_not_q;
+	reg output_q, output_not_q;
 	always @(negedge r) begin
-		q = 1'b0;
-		qbar = 1'b1;
+		output_q = 1'b0;
+		output_not_q = 1'b1;
 		end
 	always @(negedge s) begin
-		q = 1'b1;
-		qbar = 1'b0;
+		output_q = 1'b1;
+		output_not_q = 1'b0;
 		end
 	always @(posedge clk) begin
-		#1
-		q = d;
-		qbar = ~d;
+		output_q = d;
+		output_not_q = ~d;
 		end
 
 endmodule

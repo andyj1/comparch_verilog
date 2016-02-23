@@ -1,72 +1,49 @@
 //////////////////////////////////////////////////////////////////////////////////
-// Module Name: jno.v
-// Description: from the current instructions, outputs ENABLE for checking and counter 
+// Module Name: fulladder.v
+// Description: Full Adder where 1 is always added to the previous number
 //////////////////////////////////////////////////////////////////////////////////
-`timescale 1ns/1ns
 
-module jno(enabling, enabling_sta, openpulse, sta, instruct, pulses);
+`timescale 1ns / 1ns
+
+module fulladder(status, sum, a);
 
 //−−−−−−−−−−−−−Input Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 
-input [1:0] instruct; 	//input a 2 bit register from JNO
-input pulses;
-input sta;
+inout [1:0] a; //input a 2 bit register
 
 //−−−−−−−−−−−−−Output Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 
-output enabling;
-output enabling_sta;
-output openpulse;
+output [1:0] sum; //output 2 bit registers
+output status; //see whether registers overflown
 
 //−−−−−−−−−−−−−Input ports Data Type−−−−−−−−−−−−−−−−−−−
 // By rule all the input ports should be wires
-wire [1:0] instruct;
-wire pulses;
-wire sta;
+wire [1:0] a;
+wire [1:0] b;
 
 //−−−−−−−−−−−−−Output Ports Data Type−−−−−−−−−−−−−−−−−−
 // Output port can be a storage element (reg) or a wire
-wire enabling;
-wire enabling_sta;
+wire [1:0] sum;
+wire status;
 
 //−−−−−−−−−−−−−Intermediate Wires----−−−−−−−−−−−−−−−−−−
-reg s;
-reg r;
-wire notenabling, notenabling_sta;
-wire w1, w2;
-reg mem;
-reg pulser;
-wire openpulse;
-reg openpulser;
+wire w0, w1, w2, w3;
 
 //−−−−−−----−-−−−−−−Instructions---−−−−−−−−−−−−−−−--−−−
-initial begin
-s = 0;
-r = 0;
-pulser = 0;
-openpulser = 0;
-end
 
-and a1(w1, !instruct[1], instruct[0]);
-and a2(w2, !sta, !instruct[1], instruct[0]);
-and a3 (openpulse, !sta, openpulser);
+//set LSB of input to sum[0]
+xor u0(sum[0],a[0], 1'b1);
 
-always @(posedge w1)
-begin
-	#1
-	pulser = 1;
-	#8
-	openpulser = 1;
-	#4
-	openpulser = 0;
-	#1
-	pulser = 0;
-	#1
-	pulser = 1;
-	#1
-	pulser = 0;
-end
-dff dff3(pulser, s, r, w1, enabling, notenabling); //enabling the checking
-dff dff4(pulser, s, r, w2, enabling_sta, notenabling_sta); //enabling for counter
+//set MSB of input to sum[1]
+and u1(w0, a[0], 1'b1);
+xor u2(w1, a[1], 1'b0);
+and u3(w2, a[1], 1'b0);
+and u4(w3, w0, w1);
+xor u5(sum[1], w0, w1);
+
+//set carry out to be status
+or u6(status,w2, w3);
 
 endmodule
+
+

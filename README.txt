@@ -15,7 +15,7 @@ To run the compiled object file:
 	(if <objectname> is testbench, type ./testbench)
 
 To change the instruction:
-	change the bits in instruct.bin
+	change the binary instructions in instruction.bin
 
 Optional:
 To see the waveform using gtkwave simulator (as defined in code as "pp.vcd"):

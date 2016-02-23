@@ -6,35 +6,24 @@
 
 `timescale 1ns / 1ns
 
-module halt(pulses, clk, instruct);
+module halt(pulse, clk, instruction_from_jno);
 
 //−−−−−−−−−−−−−Input Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
-
-input [1:0] instruct; 	//input a 2 bit register from JNO
+input [1:0] instruction_from_jno; 	//input a 2 bit register from JNO
 input clk;
 
 //−−−−−−−−−−−−−Output Ports−−−−−−−−−−−−−−−−−−−−−−−−−−−−
+output pulse;
 
-output pulses;
-
-//−−−−−−−−−−−−−Input ports Data Type−−−−−−−−−−−−−−−−−−−
-// By rule all the input ports should be wires
 wire [1:0] instruct;
 wire clk;
-
-//−−−−−−−−−−−−−Output Ports Data Type−−−−−−−−−−−−−−−−−−
-// Output port can be a storage element (reg) or a wire
 wire pulses;
-
-//−−−−−−−−−−−−−Intermediate Wires----−−−−−−−−−−−−−−−−−−
-wire w1;
-wire w2;
+wire [1:0] w;
 
 //−−−−−−----−-−−−−−−Instructions---−−−−−−−−−−−−−−−--−−−
 
-and a1(w1, instruct[1], !instruct[0]);
-not n1(w2, w1);
-
-and(pulses, clk, w2);
+and a1(w[1], instruction_from_jno[1], !instruction_from_jno[0]);
+not n1(w[0], w[1]);
+and(pulse, clk, w[0]);
 
 endmodule
