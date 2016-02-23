@@ -27,7 +27,7 @@
 `include "dff.v"
 `include "dfff.v"
 
-module test_tb(); 
+module main_tb(); 
 
 reg status; 						// status register
 reg clock; 							// clock register
