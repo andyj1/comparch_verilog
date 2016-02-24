@@ -25,5 +25,5 @@ This project aims to construct a circuit on Verilog Hardware Description Languag
 ##### To run the compiled object file:
 	vvp <objectname>
 	
-##### To change the instruction: change the bits in instruct.bin
+##### To change the instruction: change the bits in instruction.bin
 
